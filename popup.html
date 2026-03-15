@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MemoryClip</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+
+      <!-- Header (always visible) -->
+      <header class="header">
+        <div class="logo">
+          <span class="logo-icon">🧠</span>
+          <span class="logo-text">MemoryClip</span>
+        </div>
+        <div class="header-right">
+          <span id="memory-count" class="memory-count hidden">0 memories</span>
+          <button id="gear-btn" class="gear-btn hidden" title="Settings">⚙️</button>
+        </div>
+      </header>
+
+      <!-- ── Onboarding ── -->
+      <div id="onboard-view" class="view hidden">
+        <p class="onboard-welcome">Welcome! Let's get you set up.</p>
+
+        <div class="field-group">
+          <label class="field-label">Choose your AI provider</label>
+          <div class="provider-toggle">
+            <button type="button" class="provider-btn" id="btn-claude" data-value="claude">
+              <span class="provider-icon">🟣</span> Claude
+            </button>
+            <button type="button" class="provider-btn" id="btn-openai" data-value="openai">
+              <span class="provider-icon">🟢</span> ChatGPT
+            </button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="api-key-input">Paste your API key</label>
+          <input
+            type="password"
+            id="api-key-input"
+            class="text-input"
+            placeholder="sk-..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <p id="onboard-error" class="inline-error hidden">
+          Please select a provider and paste your API key
+        </p>
+
+        <button id="onboard-submit-btn" class="btn btn-primary btn-full">
+          Get Started
+        </button>
+
+        <div class="api-key-help">
+          <p class="help-label">Where do I get an API key?</p>
+          <p class="help-line">Claude: <span class="help-url">console.anthropic.com</span></p>
+          <p class="help-line">OpenAI: <span class="help-url">platform.openai.com</span></p>
+        </div>
+      </div>
+
+      <!-- ── Settings ── -->
+      <div id="settings-view" class="view hidden">
+        <div class="settings-row">
+          <span class="settings-label">Provider</span>
+          <span id="settings-provider" class="settings-value"></span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">API key</span>
+          <span id="settings-key-masked" class="settings-value settings-key"></span>
+        </div>
+        <button id="settings-change-btn" class="btn btn-danger btn-full">
+          Change API Key / Provider
+        </button>
+        <button id="settings-back-btn" class="btn btn-secondary btn-full">
+          Back
+        </button>
+      </div>
+
+      <!-- ── Learn UI (non-AI tabs) ── -->
+      <div id="learn-view" class="view hidden">
+        <button id="learn-btn" class="btn btn-primary btn-full">
+          Learn This Page
+        </button>
+
+        <div id="learn-memory-list" class="memory-list hidden">
+          <div id="learn-items" class="memory-items"></div>
+        </div>
+        <button id="learn-clear-btn" class="btn-link danger hidden">Clear All</button>
+      </div>
+
+      <!-- ── Loading state ── -->
+      <div id="loading-view" class="view hidden">
+        <div class="spinner-wrap">
+          <div class="spinner"></div>
+          <p id="loading-text" class="loading-text">Reading page...</p>
+        </div>
+      </div>
+
+      <!-- ── Success state ── -->
+      <div id="success-view" class="view hidden">
+        <div class="success-wrap">
+          <span class="success-icon">✅</span>
+          <p class="success-msg">Saved!</p>
+          <p id="summary-preview" class="summary-preview"></p>
+        </div>
+      </div>
+
+      <!-- ── Error state ── -->
+      <div id="error-view" class="view hidden">
+        <div class="error-wrap">
+          <span class="error-icon">⚠️</span>
+          <p id="error-msg" class="error-msg"></p>
+          <button id="error-back-btn" class="btn btn-secondary btn-full">Back</button>
+        </div>
+      </div>
+
+      <!-- ── Paste UI (Claude / ChatGPT tabs) ── -->
+      <div id="paste-view" class="view hidden">
+        <p id="paste-heading" class="paste-heading">0 memories ready</p>
+
+        <div id="paste-memory-list" class="memory-list">
+          <div id="paste-items" class="memory-items"></div>
+        </div>
+
+        <div class="paste-actions">
+          <button id="paste-btn" class="btn btn-primary btn-full">
+            Paste Memories
+          </button>
+          <button id="paste-clear-btn" class="btn btn-danger btn-full">
+            Clear All
+          </button>
+        </div>
+
+        <p id="paste-status" class="paste-status hidden"></p>
+      </div>
+
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
